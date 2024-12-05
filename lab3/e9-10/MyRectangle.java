@@ -35,11 +35,4 @@ public class MyRectangle{
 	public String toString(){
 		return "Rettangolo: x="+Double.toString(posX)+", y="+Double.toString(posY)+" ,w="+Double.toString(w)+" h="+Double.toString(h);
 	}
-	
-	
-	
-	
-	
-	
-	
 }
