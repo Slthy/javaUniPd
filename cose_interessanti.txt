@@ -1,0 +1,2 @@
+lab7:
+	-e1:	*)Variabili statiche!
