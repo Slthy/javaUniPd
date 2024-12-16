@@ -31,6 +31,15 @@ public class ArrayAlgs{
 
 		Utils.merge(arr, left, right);
 	}
+
+	public static void insertionSort(int[] arr){
+		for (int i = 1; i < arr.length; i++) {
+			for (int j = i - 1; j>=0; j--) {
+				if(arr[j] < arr[j+1]) Utils.swap(arr, j, j+1); else break;
+			}
+		}
+
+	}
 }
 class Utils{
 	public static int searchMinI(int[] arr, int n){
