@@ -49,8 +49,22 @@ public class QuadraticEquation{
 		return 2;
   	}
 
+  	public String toString(){
+  		if(nSol == 0) {
 
-  
+			if(infSolutionsFLAG){
+				return "L'equazione ha infinite soluzioni.";
+			} else {
+				return "L'equazione non ha alcuna soluzione.";
+			}
+		} else {
+			String output = String.format("Soluzione 1: %.2f\n", solutions[0]);
+			if (nSol == 2) output += String.format("Soluzione 2: %.2f\n", solutions[1]);
+			return output;
+		}
+
+
+  	}
 
 }
 class Tools{
