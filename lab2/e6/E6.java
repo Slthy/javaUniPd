@@ -1,7 +1,7 @@
 public class E6{
 	public static void main (String[] args){
 		int[] numbers = {128, 28, 8};
-		for(byte i = 0; i<3; i++){
+		for(int i = 0; i<3; i++){
 			int current_n = numbers[i];
 			int[] n = new int[3];
 			for (byte j = 2; j>=0; j--){
