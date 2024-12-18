@@ -25,6 +25,7 @@ public class DNAProfile{
 
 			}
 		} catch (Exception e) {System.out.println(e);}
+		for(Result r : results) System.out.println(r.toString());
 
 		for (int p = 0; p < ppl.length; p++) {
 			
@@ -80,6 +81,11 @@ class STR implements Comparable{
 	private String sequence;
 	private int maxReps;
 
+	public STR(String s, int m){
+		sequence = s;
+		maxReps = m;
+	}	
+
 	public String getSequence(){
 		return sequence;
 	}
@@ -101,23 +107,21 @@ class STR implements Comparable{
 class Person_STR extends STR{
 
 	public Person_STR(String s, int m){
-		sequence = s;
-		maxReps = m;
-	}
+		super(s, m);
+	}	
 }
 
 class Result extends STR{
 
 	public Result(String str, String caso){
 
-		sequence = str;
-		maxReps = findMaxReps(str, caso);
+		super(str, findMaxReps(str, caso));
 	}
-
 	public static int findMaxReps(String str, String caso){
 		int reps = 0;
-		while(caso.contains(str)){
-			caso = caso.replaceFirst(str, "");
+		String seq = str;
+		while(caso.contains(seq)){
+			seq += str;
 			reps++;
 		}
 		return reps;
