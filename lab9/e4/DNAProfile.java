@@ -27,6 +27,7 @@ public class DNAProfile{
 		} catch (Exception e) {System.out.println(e);}
 
 		for (int p = 0; p < ppl.length; p++) {
+			
 			Person_STR[] counts = ppl[p].getCounts();
 			int matches = 0;
 			for (int c = 0; c < counts.length; c++) if(counts[c].compareTo(results[c])) matches++;
@@ -47,6 +48,7 @@ class People{
 
 
 	public People(String record, String[] strToMatch){
+
 		Scanner sc = new Scanner(record);
 		name = sc.next();
 		counts = new Person_STR[strToMatch.length];
@@ -63,8 +65,8 @@ class People{
 		return name;
 	}
 
-
 	public String toString(){
+
 		String output = String.format("Nome: %s\n", name);
 		for(STR s : counts){
 			output += s.toString();
@@ -74,6 +76,7 @@ class People{
 }
 
 class STR implements Comparable{
+
 	private String sequence;
 	private int maxReps;
 
@@ -104,7 +107,9 @@ class Person_STR extends STR{
 }
 
 class Result extends STR{
+
 	public Result(String str, String caso){
+
 		sequence = str;
 		maxReps = findMaxReps(str, caso);
 	}
@@ -123,8 +128,10 @@ class Result extends STR{
 class Tools{
 
 	public static String[] getSTRs(String filepath){
+
 		int strCount = 0;
 		String buffer = "";
+
 		try(FileReader r = new FileReader(filepath); Scanner b = new Scanner(r)){
 			Scanner s = new Scanner(b.nextLine());
 			s.next();	//workaround: we dont want "name   " in the buffer
@@ -143,9 +150,12 @@ class Tools{
 	}
 
 	public static String[] getNames(String filepath){
+
 		int namesCount = 0;
 		String buffer = "";
+
 		try(FileReader r = new FileReader(filepath); Scanner b = new Scanner(r)){
+
 			b.nextLine();
 			while(b.hasNextLine()){
 				Scanner names = new Scanner(b.nextLine());
