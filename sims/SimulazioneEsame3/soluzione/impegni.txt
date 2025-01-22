@@ -1,0 +1,16 @@
+I
+0 Studiare polimorfismo!
+I
+3 Restituire prestito a Gigi
+I
+2 Email a coso
+L
+R
+I
+1 Comprare Aperol x spritz
+I
+0 Iscrizione esame! 
+L
+R
+L
+Q

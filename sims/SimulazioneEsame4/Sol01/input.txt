@@ -1,0 +1,2 @@
+ear : orecchio
+arm : braccio arma

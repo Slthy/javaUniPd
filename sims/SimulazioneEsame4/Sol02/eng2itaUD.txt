@@ -1,0 +1,5 @@
+arm : braccio arma
+ear : orecchio
+hand : mano
+head : testa capo comandante
+leg : gamba zampa
