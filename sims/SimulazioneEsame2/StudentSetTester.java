@@ -1,10 +1,39 @@
 // nome e cognome del candidato, matricola, data, numero della postazione
 
+import java.util.*;
+import java.io.*;
 
 public class StudentSetTester
-{   public static void main(String[] args)
-    {
-      // ....... da completare ............
+{   public static void main(String[] args){
+        String path1 = args[0];
+        StudentSet matricole = new StudentSet();
+        int i = 0;
+        try(Scanner input = new Scanner(new FileReader(path1))){
+            while(input.hasNextLine()){
+                Scanner line = new Scanner(input.nextLine());
+                String c = line.next();
+                line.useDelimiter(": ");
+                String n = line.next();
+                int m = line.nextInt();
+                matricole.add(new Student(c, n, m));
+            }
+        } catch (FileNotFoundException e) {return;}
+        System.out.println(matricole.toString());
+
+        Scanner input2 = new Scanner(System.in);
+        while(input2.hasNextLine()){
+            Scanner line = new Scanner(input2.nextLine());
+            String stringa1 = line.next();
+            String stringa2 = line.next();
+
+            Student from = new Student(stringa1, "", 0);
+            Student to = new Student(stringa2, "", 0);
+            
+            StudentSet canale = (StudentSet)matricole.subSet(from, to);
+            System.out.printf("\nStudenti da %s a %s:\n%s", stringa1, stringa2, canale.toString());
+        }
+        input2.close();
+
     }
 }
 
@@ -12,11 +41,92 @@ public class StudentSetTester
 class StudentSet implements SortedSet
 {
     //costruttori e metodi pubblici ......da completare ......
+    private static int INITSIZE = 1;
+    private int vsize;
+    private Student[] v;
 
-    public String toString()
-    {  }          // ..... da completare .........
+    // verifica se l'insieme contiene almeno un elemento
+    public boolean isEmpty(){
+        return vsize == 0;
+    } 
 
-    //campi di esemplare ..... da completare ......
+    // svuota l'insieme
+    public void makeEmpty(){
+        vsize = 0;
+    }
+
+    public StudentSet(){
+        v = new Student[INITSIZE];
+        makeEmpty();
+    }
+
+    // restituisce il numero di elementi nell'insieme
+    public int size(){
+        return vsize;
+    }
+    /*
+        Restituisce true se e solo se l'oggetto comparabile obj appartiene  
+        all'insieme. Verranno considerate ottime le soluzioni per cui questo 
+        metodo ha prestazioni O(log n) 
+    */
+    public boolean contains(Comparable obj){
+        if (isEmpty()) return false;
+        return (binSearch(0, v.length, obj) == -1) ? false : true;
+    };
+  
+    /*
+        Inserisce l'oggetto comparabile obj nell'insieme se non e` gia` 
+        presente, altrimenti fallisce silenziosamente.
+    */
+
+    private void resize(){
+        Student[] nv = new Student[v.length * 2];
+        System.arraycopy(v, 0, nv, 0, v.length);
+        v = nv;
+    }
+    public void add(Comparable obj){
+        if (!(obj instanceof Student)) throw new IllegalArgumentException();
+        if (contains(obj)) return;
+        if (vsize == v.length) resize();
+        int i = vsize;
+        while(i>0 && v[i-1].compareTo(obj) > 0){
+            v[i] = v[i-1];
+            i--;
+        }
+        v[i] = (Student) obj;
+        vsize++;
+    };
+
+    public String toString(){  
+        String output = "";
+        for(int i = 0; i<vsize; i++) output += String.format("%s\n", v[i].toString());
+        return output;
+    }
+
+
+    private int binSearch(int from, int to, Object obj){
+        if(to > from) return -1;
+        int mid = (from + to) / 2;
+        if (v[mid].compareTo(obj) == 0) return mid;
+        if (v[mid].compareTo(obj) < 0) 
+            return binSearch(mid + 1, to, obj); 
+        else return binSearch(from, mid - 1, obj);
+    }
+    public SortedSet subSet(Comparable fromObj, Comparable toObj){
+        StudentSet output = new StudentSet();
+        for (int i = 0; i<vsize; i++) {
+            if(v[i].compareTo(fromObj)>=0 && v[i].compareTo(toObj) < 0){
+                if (output.vsize == output.v.length) output.resize();
+                output.v[output.vsize++] = this.v[i];
+            }
+        }
+        return output;
+    };
+    public Comparable[] toArray(){
+        Comparable[] output = new Comparable[v.length];
+        System.arraycopy(v, 0, output, 0, v.length);
+        return output;
+    }
 }
 
 
