@@ -1,0 +1,7 @@
+CrudoDiParma 6,50
+Prosciutto 5,50
+FruttiDiMare 9
+TrisDiFunghi 8,50
+Bufala 6,00
+Margherita 4,00
+QuattroFormaggi 7,00
